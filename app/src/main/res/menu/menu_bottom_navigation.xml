@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_baseline_public_24_yellow"
+            android:title="@string/losts">
+        </item>
+
+        <item
+            android:id="@+id/message"
+            android:icon="@drawable/ic_baseline_chat_24"
+            android:title="@string/messenger">
+        </item>
+
+        <item
+            android:id="@+id/news"
+            android:icon="@drawable/ic_baseline_menu_book_24"
+            android:title="@string/encyclopedia">
+        </item>
+    </group>
+
+</menu>

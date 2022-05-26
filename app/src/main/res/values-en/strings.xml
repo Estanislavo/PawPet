@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">PetsPlace</string>
+    <string name="username">Username</string>
+    <string name="friends">Friends</string>
+    <string name="pets">Pets</string>
+    <string name="user">User</string>
+    <string name="city">City</string>
+    <string name="search">Search</string>
+    <string name="write">Message</string>
+    <string name="exit">Sign out</string>
+    <string name="messages">Messages</string>
+    <string name="my_profile">Мy profile</string>
+    <string name="friend_name">Friend name</string>
+    <string name="register">Register</string>
+    <string name="enter">Sign in</string>
+    <string name="add_friend">Add</string>
+    <string name="wrong_login_or_password">Wrong login or password</string>
+    <string name="message">Message...</string>
+    <string name="animal">Pet</string>
+    <string name="cats">Cat</string>
+    <string name="dogs">Dogs</string>
+    <string name="fish">Fish</string>
+    <string name="rodents">Rodents</string>
+    <string name="birds">Birds</string>
+    <string name="exotic_animals">Exotic</string>
+    <string name="animal_type">Animal type</string>
+    <string name="choice">Choose a pet</string>
+    <string name="next">Continue</string>
+    <string name="cat">Cat</string>
+    <string name="dog">Dog</string>
+    <string name="fish1">Fish</string>
+    <string name="rodent">Rodent</string>
+    <string name="bird">Bird</string>
+    <string name="exotic_animal">Exotic</string>
+    <string name="choose_name_pet">Your pet\'s name</string>
+    <string name="choose_age_pet">How old is he</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_login">Enter login</string>
+    <string name="enter_image_name">Enter the name</string>
+    <string name="enter_text">Enter text</string>
+    <string name="send_friend_request">Add as friend</string>
+    <string name="send">Send</string>
+    <string name="enter_password">Enter password</string>
+    <string name="congrats">Congrats!</string>
+    <string name="congrats_new_pet">You have a new pet</string>
+    <string name="gender">Gender</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="confirm">Confirm</string>
+    <string name="messenger">Messenger</string>
+    <string name="encyclopedia">Encyclopedia</string>
+    <string name="losts">Losts</string>
+    <string name="count">Count</string>
+
+
+    <string name="no_ethernet">No internet connection</string>
+    <string name="login_failed">Failed to login</string>
+    <string name="register_failed">Failed to register</string>
+    <string name="bad_email">Wrong email address form</string>
+    <string name="try_again">Try again</string>
+    <string name="action_weather">Weather</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_menu_drawer">MenuDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="weather">Weather</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_your_profile">Profile</string>
+    <string name="menu_username_profile">Username profile</string>
+    <string name="finds">Finds</string>
+    <string name="settings">Settings</string>
+    <string name="list">List</string>
+
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_your_profile">YourProfile</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+    <string name="fragment_go_to_registration">Sign out</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+</resources>

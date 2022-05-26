@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MissingAdd">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="60dp"
+        android:id="@+id/imageName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_image_name"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:counterMaxLength="20"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/setImageName"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="20"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="60dp"
+        android:id="@+id/text"
+        android:layout_below="@id/imageName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_text"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:counterMaxLength="60"
+        app:counterEnabled="true"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/setText"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="60"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:layout_below="@id/text"
+        android:id="@+id/upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="100dp"
+        android:text="Upload"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_below="@id/imageName"
+        android:id="@+id/showUpload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="100dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/sendImage"
+        android:layout_below="@id/upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/send"/>
+</RelativeLayout>

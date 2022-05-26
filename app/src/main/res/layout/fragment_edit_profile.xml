@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.editprofile.EditProfileFragment">
+
+
+    <RelativeLayout
+        android:layout_marginTop="40dp"
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/changeProfileIcon"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/man_avatr"/>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card1"
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginHorizontal="100dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="10dp"
+                    app:cardCornerRadius="40dp">
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/user"
+                        android:textSize="28dp"/>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_below="@id/card1"
+                    android:id="@+id/card2"
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginHorizontal="100dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="10dp"
+                    app:cardCornerRadius="40dp">
+
+                    <TextView
+                        android:layout_below="@id/username"
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/city"
+                        android:textSize="28dp"/>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="@string/gender"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginHorizontal="64dp"
+            android:id="@+id/confirm"
+            app:cornerRadius="40dp"
+            android:layout_marginTop="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/confirm"
+            android:textSize="16dp"
+            android:textColor="@color/orange"/>
+    </RelativeLayout>
+</FrameLayout>

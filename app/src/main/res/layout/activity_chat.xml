@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Chat">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/messageForr"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/friendPictureChat"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/man_avatr"
+                android:layout_marginLeft="80dp"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/usernameMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="28dp"
+                android:text="@string/friend_name"
+                android:textColor="@color/orange"
+                android:gravity="clip_horizontal"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listOfMessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/messageCompleteL"
+        android:layout_below="@id/messageForr"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="12dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sendMessage"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="@color/orange"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:src="@drawable/ic_orange_send_24"
+        app:rippleColor="@color/orange"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/messageCompleteL"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@id/sendMessage"
+        app:boxStrokeColor="@color/orange"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:counterMaxLength="50">
+
+        <com.google.android.material.textfield.TextInputEditText
+            app:hintTextAppearance="@color/orange"
+            android:id="@+id/messageComplete"
+            android:inputType="textLongMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="50"
+            android:hint="@string/message"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+</RelativeLayout>

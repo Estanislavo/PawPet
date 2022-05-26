@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "795802652300",
+    "project_id": "pawpet-42870",
+    "storage_bucket": "pawpet-42870.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795802652300:android:f26582d7bea1a7ee9e75a9",
+        "android_client_info": {
+          "package_name": "com.example.aniapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795802652300-dreh91n0sccpj9diajnrudeuqp2nn3fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDXHrFfr5tfuTOCd7E_uPA1epdtRYRrbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795802652300-dreh91n0sccpj9diajnrudeuqp2nn3fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795802652300:android:158abe5dd8638bc59e75a9",
+        "android_client_info": {
+          "package_name": "com.example.petsplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795802652300-dreh91n0sccpj9diajnrudeuqp2nn3fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDXHrFfr5tfuTOCd7E_uPA1epdtRYRrbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795802652300-dreh91n0sccpj9diajnrudeuqp2nn3fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

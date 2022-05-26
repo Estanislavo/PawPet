@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".animal.AnimalCreate">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImage"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:src="@drawable/lion"
+        app:civ_border_color="@color/orange"
+        app:civ_circle_background_color="@color/orange"
+        android:outlineAmbientShadowColor="@color/orange"/>
+
+    <TextView
+        android:id="@+id/congrats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/circleImage"
+        android:layout_marginTop="40dp"
+        android:text="@string/congrats"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="@color/orange"></TextView>
+
+    <TextView
+        android:id="@+id/congratsPet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/congrats"
+        android:layout_marginTop="40dp"
+        android:text="@string/congrats_new_pet"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        android:textColor="@color/orange"></TextView>
+
+</RelativeLayout>

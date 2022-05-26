@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:name="android.navigation.fragment.NavHostFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.lists.AllUsersListFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".UserList"
+        android:id="@+id/relativeList">
+
+        <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="14dp"
+            app:boxCornerRadiusBottomStart="14dp"
+            app:boxCornerRadiusTopEnd="14dp"
+            app:boxCornerRadiusTopStart="14dp"
+            app:boxStrokeColor="@color/orange"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="60dp"
+            android:id="@+id/searchBarL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search"
+            app:hintTextColor="@color/orange"
+            app:startIconDrawable="@drawable/ic_baseline_search_24"
+            app:counterMaxLength="20"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                app:hintTextAppearance="@color/orange"
+                android:id="@+id/searchBar"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="20"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listOfFriends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchBarL"
+            android:layout_marginTop="10dp" />
+    </RelativeLayout>
+
+</FrameLayout>

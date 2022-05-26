@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">PetsPlace</string>
+    <string name="username">Имя пользователя</string>
+    <string name="friends">Друзья</string>
+    <string name="pets">Питомцы</string>
+    <string name="user">Пользователь</string>
+    <string name="city">Город</string>
+    <string name="search">Поиск</string>
+    <string name="write">Сообщение</string>
+    <string name="exit">Выйти из аккаунта</string>
+    <string name="messages">Сообщение</string>
+    <string name="my_profile">Мой профиль</string>
+    <string name="friend_name">Имя друга</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="enter">Войти</string>
+    <string name="add_friend">Добавить</string>
+    <string name="wrong_login_or_password">Неверный логин или пароль</string>
+    <string name="message">Сообщение...</string>
+    <string name="animal">Питомец</string>
+    <string name="cats">Кошки</string>
+    <string name="dogs">Собаки</string>
+    <string name="fish">Рыбы</string>
+    <string name="rodents">Грызуны</string>
+    <string name="birds">Птицы</string>
+    <string name="exotic_animals">Экзотические</string>
+    <string name="animal_type">Питомец?</string>
+    <string name="choice">Выберите питомца</string>
+    <string name="next">Продолжить</string>
+    <string name="cat">Кошка</string>
+    <string name="dog">Собака</string>
+    <string name="fish1">Рыба</string>
+    <string name="rodent">Грызун</string>
+    <string name="bird">Птица</string>
+    <string name="exotic_animal">Экзотический</string>
+    <string name="choose_name_pet">Имя вашего питомца</string>
+    <string name="choose_age_pet">Сколько ему лет</string>
+    <string name="enter_email">Введите email</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="enter_image_name">Введите название</string>
+    <string name="enter_text">Введите текст</string>
+    <string name="send_friend_request">Добавить в друзья</string>
+    <string name="send">Отправить</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="congrats">Поздравляем!</string>
+    <string name="congrats_new_pet">У вас новый питомец</string>
+    <string name="gender">Пол</string>
+    <string name="edit_profile">Редактировать профиль</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="messenger">Месенджер</string>
+    <string name="encyclopedia">Энциклопедия</string>
+    <string name="losts">Потеряшки</string>
+    <string name="count">Количество</string>
+
+
+    <string name="no_ethernet">Отсутсвует подключение к интернету</string>
+    <string name="login_failed">Не удалось войти</string>
+    <string name="register_failed">Не удалось зарегистрироваться</string>
+    <string name="bad_email">Неправильная форма email адреса</string>
+    <string name="try_again">Попробуйте ещё раз</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_menu_drawer">MenuDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_weather">Погода</string>
+
+    <string name="menu_home">Дом</string>
+    <string name="menu_gallery">Галлерея</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_your_profile">Профиль</string>
+    <string name="menu_username_profile">Чужой профиль</string>
+    <string name="finds">Находки</string>
+    <string name="settings">Настройки</string>
+    <string name="weather">Погода</string>
+    <string name="list">Список</string>
+
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="title_activity_profile">Профиль</string>
+    <string name="title_activity_your_profile">Ваш профиль</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+    <string name="fragment_go_to_registration">Выйти из аккаунта</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+</resources>

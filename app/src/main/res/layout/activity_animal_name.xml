@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".animal.AnimalName">
+
+    <com.google.android.material.textfield.TextInputLayout
+        app:boxStrokeColor="@color/orange"
+        android:layout_marginTop="260dp"
+        android:layout_marginHorizontal="60dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        android:id="@+id/enterTextName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/choose_name_pet"
+        app:hintTextColor="@color/orange"
+        app:startIconDrawable="@drawable/ic_baseline_pets_24"
+        app:counterMaxLength="20"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            app:hintTextAppearance="@color/orange"
+            android:id="@+id/petName"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="20"
+            android:textSize="20dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_below="@+id/enterTextName"
+        app:boxStrokeColor="@color/orange"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="60dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        android:id="@+id/enterTextAge"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/choose_age_pet"
+        app:hintTextColor="@color/orange"
+        app:startIconDrawable="@drawable/ic_baseline_pets_24"
+        app:counterMaxLength="20"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            app:hintTextAppearance="@color/orange"
+            android:id="@+id/petAge"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="20"
+            android:textSize="20dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.button.MaterialButton
+        app:cornerRadius="40dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginHorizontal="76dp"
+        android:id="@+id/confirm"
+        android:layout_marginTop="28dp"
+        android:layout_below="@id/enterTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:textSize="20dp"
+        android:textColor="@color/orange"/>
+</RelativeLayout>

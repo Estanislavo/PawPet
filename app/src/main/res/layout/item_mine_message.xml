@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <androidx.cardview.widget.CardView
+            app:cardBackgroundColor="@color/mine_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="4dp"
+            android:layout_alignParentRight="true"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/message_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="MyMessage"
+                            android:textSize="20dp"
+                            android:padding="8dp"/>
+                </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

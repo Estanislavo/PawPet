@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.profiles.NotFriendUserProfileFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profilePicture"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/man_avatr"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="4dp" />
+
+        <LinearLayout
+            android:id="@+id/linearButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/profileUsername"
+            android:gravity="center">
+
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="40dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:id="@+id/buttonWrite"
+                android:layout_below="@id/profileUsername"
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+                android:text="@string/write"
+                android:textSize="13dp"
+                android:textColor="@color/orange"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginLeft="10dp"
+                app:cornerRadius="40dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:id="@+id/buttonAddFriend"
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+                android:text="@string/send_friend_request"
+                android:textSize="13dp"
+                android:textColor="@color/orange"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/profileUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_below="@id/profilePicture"
+            android:text="@string/username"
+            android:textAlignment="center"
+            android:textSize="40dp"
+            android:textStyle="bold">
+        </TextView>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:id="@+id/line1"
+            android:layout_below="@id/linearButtons"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"/>
+
+        <LinearLayout
+            android:id="@+id/petL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/pets"
+                android:textAlignment="textStart"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/petsCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/count"
+                android:textAlignment="textStart"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearPets"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/petL"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/petsRecyclerList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_below="@id/linearPets"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"/>
+
+        <LinearLayout
+            android:id="@+id/lineFriends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/friends"
+                android:textAlignment="textStart"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/friendsCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/count"
+                android:textAlignment="textStart"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="1dp"
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/lineFriends"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/friendsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_alignParentBottom="true"
+            android:id="@+id/bottom"
+            app:itemIconTint="@color/orange"
+            app:itemTextColor="@color/orange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/menu_bottom_navigation"
+            />
+    </RelativeLayout>
+</FrameLayout>

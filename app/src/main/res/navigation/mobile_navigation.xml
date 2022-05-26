@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_yourProfile">
+
+    <fragment
+        android:id="@+id/nav_yourProfile"
+        android:name="com.example.petsplace.fragments.profiles.YourProfileFragment"
+        android:label="@string/menu_your_profile"
+        tools:layout="@layout/fragment_your_profile" >
+        <action
+            android:id="@+id/action_nav_yourProfile_to_nav_usernameProfile"
+            app:destination="@id/nav_usernameProfile" />
+        <action
+            android:id="@+id/action_nav_yourProfile_to_nav_globalList"
+            app:destination="@id/nav_globalList" />
+        <action
+            android:id="@+id/action_nav_yourProfile_to_nav_missingShow"
+            app:destination="@id/nav_missingShow" />
+        <action
+            android:id="@+id/action_nav_yourProfile_to_nav_arcticleList"
+            app:destination="@id/nav_arcticleList" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_usernameProfile"
+        android:name="com.example.petsplace.fragments.profiles.UsernameProfileFragment"
+        android:label="@string/menu_username_profile"
+        tools:layout="@layout/fragment_username_profile" >
+        <action
+            android:id="@+id/action_nav_usernameProfile_to_nav_missingShow"
+            app:destination="@id/nav_missingShow" />
+        <action
+            android:id="@+id/action_nav_usernameProfile_to_nav_arcticleList"
+            app:destination="@id/nav_arcticleList" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_missingShow"
+        android:name="com.example.petsplace.fragments.missing.MissingShowFragment"
+        android:label="@string/finds"
+        tools:layout="@layout/fragment_missing_show" >
+        <action
+            android:id="@+id/action_nav_missingShow_to_nav_usernameProfile"
+            app:destination="@id/nav_usernameProfile" />
+        <action
+            android:id="@+id/action_nav_missingShow_to_nav_arcticleList"
+            app:destination="@id/nav_arcticleList" />
+    </fragment>
+
+
+    <activity
+        android:id="@+id/nav_registration"
+        android:name="com.example.petsplace.Registration"
+        android:label="@string/exit"
+        tools:layout="@layout/activity_registration" />
+    <fragment
+        android:id="@+id/nav_globalList"
+        android:name="com.example.petsplace.fragments.lists.AllUsersListFragment"
+        android:label="@string/list"
+        tools:layout="@layout/fragment_all_users_list" >
+        <action
+            android:id="@+id/action_nav_globalList_to_nav_usernameProfile"
+            app:destination="@id/nav_usernameProfile"
+            app:popUpTo="@+id/nav_globalList"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_nav_globalList_to_nav_notFriendProfile"
+            app:destination="@id/nav_notFriendProfile"
+            app:popUpTo="@+id/nav_globalList"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_arcticleList"
+        android:name="com.example.petsplace.fragments.lists.ArcticleListFragment"
+        android:label="@string/encyclopedia"
+        tools:layout="@layout/fragment_arcticle_list" />
+    <fragment
+        android:id="@+id/nav_notFriendProfile"
+        android:name="com.example.petsplace.fragments.profiles.NotFriendUserProfileFragment"
+        android:label="fragment_not_friend_user_profile"
+        tools:layout="@layout/fragment_not_friend_user_profile" >
+        <action
+            android:id="@+id/action_nav_notFriendProfile_to_nav_friendRequests"
+            app:destination="@id/nav_friendRequests"
+            app:popUpTo="@+id/nav_notFriendProfile"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_friendRequests"
+        android:name="com.example.petsplace.fragments.lists.FriendRequestsListFragment"
+        android:label="fragment_friend_requests_list"
+        tools:layout="@layout/fragment_friend_requests_list" >
+        <action
+            android:id="@+id/action_nav_friendRequests_to_nav_yourProfile"
+            app:destination="@id/nav_yourProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_editProfile"
+        android:name="com.example.petsplace.fragments.editprofile.EditProfileFragment"
+        android:label="@string/edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/nav_weather"
+        android:name="com.example.petsplace.fragments.weather.WeatherFragment"
+        android:label=""
+        tools:layout="@layout/fragment_weather" />
+
+    <fragment
+        android:id="@+id/nav_goToRegistration"
+        android:name="com.example.petsplace.fragments.profiles.GoToRegistrationFragment"
+        android:label="fragment_go_to_registration"
+        tools:layout="@layout/fragment_go_to_registration" />
+
+
+</navigation>
