@@ -64,6 +64,7 @@ public class ArcticleListFragment extends Fragment implements RecyclerViewInterf
         });
 
         thread.run();
+        //Ва
 
         adapter = new ArticleDataAdapter(getActivity(), articles, this);
         recycler.setAdapter(adapter);
