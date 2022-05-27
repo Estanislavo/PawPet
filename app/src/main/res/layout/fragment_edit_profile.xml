@@ -41,8 +41,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:padding="10dp"
-                    app:cardCornerRadius="40dp">
+                    android:padding="10dp">
                     <TextView
                         android:id="@+id/username"
                         android:layout_width="match_parent"
@@ -64,8 +63,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:padding="10dp"
-                    app:cardCornerRadius="40dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:layout_below="@id/username"
@@ -78,16 +76,6 @@
                 </androidx.cardview.widget.CardView>
             </RelativeLayout>
         </LinearLayout>
-
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/line2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="@string/gender"/>
-
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MailConfirm">
+
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_marginTop="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/verify_email"
+        android:textColor="@color/orange"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+
+    <com.google.android.material.button.MaterialButton
+        app:cornerRadius="40dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginHorizontal="100dp"
+        android:id="@+id/check"
+        android:layout_below="@id/text"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/check"
+        android:textSize="18dp"
+        android:textColor="@color/orange"/>
+
+    <TextView
+        android:id="@+id/or"
+        android:layout_below="@id/check"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/or"
+        android:textColor="@color/orange"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+
+    <com.google.android.material.button.MaterialButton
+        app:cornerRadius="40dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginHorizontal="80dp"
+        android:id="@+id/exit"
+        android:layout_below="@id/or"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/exit"
+        android:textSize="16dp"
+        android:textColor="@color/orange"/>
+
+</RelativeLayout>

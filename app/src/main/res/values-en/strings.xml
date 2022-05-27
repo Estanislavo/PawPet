@@ -40,12 +40,22 @@
     <string name="add_image">Add image</string>
     <string name="enter_image_name">Enter the name</string>
     <string name="enter_text">Enter text</string>
+    <string name="check">Check</string>
+    <string name="or">Or</string>
     <string name="send_friend_request">Add as friend</string>
-    <string name="reset_password"><u>Recover</u></string>
+    <string name="reset_password"><u>Reset</u></string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="recovery">Account recovery</string>
     <string name="enter_email_rec">Enter your email!</string>
     <string name="send">Send</string>
+    <string name="email_not_verified">Mail not confirmed</string>
+    <string name="wrong_format_text">Wrong email, username or password format</string>
+    <string name="wrong_format">Wrong format</string>
+
+    <string name="unable_register">Failed to register</string>
+    <string name="check_nickname">Try a different email and username</string>
+    <string name="verify_email">Confirm mail</string>
+    <string name="verify_email_for_continue">Confirm your email address to continue</string>
     <string name="enter_password">Enter password</string>
     <string name="congrats">Congrats!</string>
     <string name="congrats_new_pet">You have a new pet</string>

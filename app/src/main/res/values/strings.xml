@@ -11,6 +11,15 @@
     <string name="messages">Сообщение</string>
     <string name="my_profile">Мой профиль</string>
     <string name="friend_name">Имя друга</string>
+    <string name="check">Проверить</string>
+    <string name="or">Или</string>
+    <string name="email_not_verified">Почта не подтверждена</string>
+    <string name="verify_email">Подтвердите вашу почту</string>
+    <string name="wrong_format_text">Неверный формат почты, логина или пароля</string>
+    <string name="wrong_format">Неверный формат</string>
+    <string name="unable_register">Не удалось зарегистрироваться</string>
+    <string name="check_nickname">Попробуйте другую почту и имя пользователя</string>
+    <string name="verify_email_for_continue">Подтвердите почту для продолжения</string>
     <string name="register">Зарегистрироваться</string>
     <string name="enter">Войти</string>
     <string name="add_friend">Добавить</string>

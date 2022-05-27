@@ -68,65 +68,22 @@ public class Registration extends AppCompatActivity {
         passwordText = findViewById(R.id.editpass);
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            Intent intent = new Intent(context, Profile.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finishAfterTransition();
+            if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                Intent intent = new Intent(context, Profile.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finishAfterTransition();
+            }
+            else{
+                Intent intent = new Intent(context, MailConfirm.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finishAfterTransition();
+            }
         }
 
         else{
-
-            FirebaseUser isAuthorized = FirebaseAuth.getInstance().getCurrentUser();
-
-            auth = FirebaseAuth.getInstance();
-            usersDatabase = FirebaseDatabase.getInstance().getReference("Users");
-
-            registration.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!HelperClass.hasConnection(context)){
-                        createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
-                    }
-                    else {
-                        registration.setClickable(false);
-                        createUser();
-                        addUser();
-                    }
-
-                }
-            });
-
-            entry.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if (!HelperClass.hasConnection(getApplicationContext())){
-                        createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
-                    }
-                    else {
-                        entry.setClickable(false);
-                        authenticationUser();
-                    }
-                }
-            });
-
-            reset.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (emailText.getText().toString().length() != 0) {
-                        FirebaseAuth.getInstance().sendPasswordResetEmail(emailText.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                createSnackbarWithText(R.string.suc_res,R.string.email_send);
-                            }
-                        });
-                    }
-                    else{
-                        createSnackbarWithText(R.string.recovery,R.string.enter_email_rec);
-                    }
-                }
-            });
+            init();
         }
     }
 
@@ -143,9 +100,6 @@ public class Registration extends AppCompatActivity {
                                 FirebaseDatabase db = FirebaseDatabase.getInstance();
 
                                 registration.setClickable(true);
-
-                                Toast.makeText(context, "Регистрация прошла успешно", Toast.LENGTH_SHORT).show();
-                                UserInformation.username = usernameText.getText().toString();
                                 saveData();
 
 
@@ -154,11 +108,11 @@ public class Registration extends AppCompatActivity {
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(context, "Подтвердите почту(Не обязательно)", Toast.LENGTH_SHORT).show();
+                                                createSnackbarWithText(R.string.verify_email,R.string.verify_email);
                                             }
                                         });
                             } else {
-                                Toast.makeText(context, "Не удалось зарегистрироваться", Toast.LENGTH_SHORT).show();
+                                createSnackbarWithText(R.string.unable_register,R.string.check_nickname);
                                 registration.setClickable(true);
                             }
 
@@ -167,38 +121,37 @@ public class Registration extends AppCompatActivity {
         }
         else {
             emailText.setText("");
-            Toast.makeText(context,"Неверный формат почты, логина или пароля",Toast.LENGTH_SHORT).show();
+            createSnackbarWithText(R.string.wrong_format,R.string.wrong_format_text);
             entry.setClickable(true);
         }
     }
 
     private void authenticationUser() {
-        if (emailText.getText().toString().contains("@")
-                && emailText.getText().toString().length() != 1
-                && passwordText.getText().toString().length() != 0
-                && usernameText.getText().toString().length() != 0) {
-            auth.signInWithEmailAndPassword(emailText.getText().toString(), passwordText.getText().toString())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            saveData();
-                            if (task.isSuccessful()) {
-                                UserInformation.username = usernameText.getText().toString();
+            if (emailText.getText().toString().contains("@")
+                    && emailText.getText().toString().length() != 1
+                    && passwordText.getText().toString().length() != 0
+                    && usernameText.getText().toString().length() != 0) {
+                auth.signInWithEmailAndPassword(emailText.getText().toString(), passwordText.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                saveData();
+                                if (task.isSuccessful()) {
+                                    UserInformation.username = usernameText.getText().toString();
 
-                                Intent intent = new Intent(context, Profile.class);
-                                startActivity(intent);
-                                finishAfterTransition();
-                            } else {
-                                Toast.makeText(context, "Неверный логин или пароль", Toast.LENGTH_SHORT).show();
-                                entry.setClickable(true);
+                                    Intent intent = new Intent(context, Profile.class);
+                                    startActivity(intent);
+                                    finishAfterTransition();
+                                } else {
+                                    Toast.makeText(context, "Неверный логин или пароль", Toast.LENGTH_SHORT).show();
+                                    entry.setClickable(true);
+                                }
                             }
-                        }
-                    });
-        }
-        else{
-            Toast.makeText(context,"Неверная почта, логин или пароль",Toast.LENGTH_SHORT).show();
-            entry.setClickable(true);
-        }
+                        });
+            } else {
+                Toast.makeText(context, "Неверная почта, логин или пароль", Toast.LENGTH_SHORT).show();
+                entry.setClickable(true);
+            }
     }
 
     private void addUser() {
@@ -245,6 +198,61 @@ public class Registration extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+
+    public void init(){
+        FirebaseUser isAuthorized = FirebaseAuth.getInstance().getCurrentUser();
+
+        auth = FirebaseAuth.getInstance();
+        usersDatabase = FirebaseDatabase.getInstance().getReference("Users");
+
+        registration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!HelperClass.hasConnection(context)){
+                    createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                }
+                else {
+                    registration.setClickable(false);
+                    createUser();
+                }
+
+            }
+        });
+
+        entry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!HelperClass.hasConnection(getApplicationContext())){
+                    createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                }
+                else {
+                    entry.setClickable(false);
+                    authenticationUser();
+                }
+            }
+        });
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (emailText.getText().toString().length() != 0) {
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(emailText.getText().toString())
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    createSnackbarWithText(R.string.suc_res,R.string.email_send);
+                                }
+                            });
+                }
+                else{
+                    createSnackbarWithText(R.string.recovery,R.string.enter_email_rec);
+                }
+            }
+        });
+
     }
 
 }

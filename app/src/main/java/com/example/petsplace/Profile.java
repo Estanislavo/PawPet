@@ -52,6 +52,8 @@ public class Profile extends AppCompatActivity {
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
+        Log.d("MyTAG","Ваш юзернейм:"+UserInformation.username);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 

@@ -89,11 +89,6 @@ public class FriendRequestsListFragment extends Fragment implements RecyclerView
 
         if (off == 1) {
             if (FriendRequestsDataAdapter.isAccept == 1) {
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-                        .child("users")
-                        .child(UserInformation.username)
-                        .child("friend_requests");
-                ref.child(users.get(position)).removeValue();
                 off = 1;
 
                 DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference()
@@ -127,7 +122,13 @@ public class FriendRequestsListFragment extends Fragment implements RecyclerView
                     }
                 });
 
-                users.remove(position);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+                        .child("users")
+                        .child(UserInformation.username)
+                        .child("friend_requests");
+                ref.child(users.get(position)).removeValue();
+
+                users.remove(users.get(position));
                 adapter.notifyDataSetChanged();
             }
 
@@ -137,7 +138,7 @@ public class FriendRequestsListFragment extends Fragment implements RecyclerView
                         .child(UserInformation.username)
                         .child("friend_requests");
                 ref.child(users.get(position)).removeValue();
-                users.remove(position);
+                users.remove(users.get(position));
                 adapter.notifyDataSetChanged();
 
             }
