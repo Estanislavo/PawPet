@@ -6,7 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.lists.ArcticleListFragment">
 
+    <ProgressBar
+        android:layout_gravity="center"
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
     <RelativeLayout
+        android:id="@+id/best_relative"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

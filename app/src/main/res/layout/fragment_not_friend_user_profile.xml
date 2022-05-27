@@ -20,6 +20,7 @@
             app:civ_border_width="4dp" />
 
         <LinearLayout
+            android:layout_centerHorizontal="true"
             android:id="@+id/linearButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,11 +29,11 @@
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
-                app:cornerRadius="40dp"
+                app:cornerRadius="20dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:id="@+id/buttonWrite"
                 android:layout_below="@id/profileUsername"
-                android:layout_width="190dp"
+                android:layout_width="140dp"
                 android:layout_height="50dp"
                 android:text="@string/write"
                 android:textSize="13dp"
@@ -40,10 +41,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:layout_marginLeft="10dp"
-                app:cornerRadius="40dp"
+                app:cornerRadius="20dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:id="@+id/buttonAddFriend"
-                android:layout_width="190dp"
+                android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:text="@string/send_friend_request"
                 android:textSize="13dp"

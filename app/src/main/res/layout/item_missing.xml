@@ -20,7 +20,7 @@
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/orange"
             android:padding="10dp"
-            app:cardCornerRadius="40dp">
+            app:cardCornerRadius="20dp">
 
             <RelativeLayout
                 android:layout_width="320dp"

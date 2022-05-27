@@ -23,10 +23,11 @@ public class GoToRegistrationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_go_to_registration, container, false);
 
 
-        FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getActivity(), Registration.class);
+        FirebaseAuth.getInstance().signOut();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        getActivity().finishAfterTransition();
 
         return view;
     }

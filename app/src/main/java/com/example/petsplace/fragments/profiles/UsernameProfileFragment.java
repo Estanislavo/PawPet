@@ -20,13 +20,12 @@ import android.widget.TextView;
 
 import com.example.petsplace.Chat;
 import com.example.petsplace.ChatList;
-import com.example.petsplace.ListDisplay;
 import com.example.petsplace.R;
 import com.example.petsplace.adapters.FriendsDataAdapter;
 import com.example.petsplace.adapters.PetsDataAdapter;
 import com.example.petsplace.adapters.RecyclerViewInterface;
-import com.example.petsplace.animal.AnimalChoice;
 import com.example.petsplace.auxiliary.Animal;
+import com.example.petsplace.auxiliary.UserInformation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.ChildEventListener;
@@ -62,7 +61,12 @@ public class UsernameProfileFragment extends Fragment implements RecyclerViewInt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         inflatedView = inflater.inflate(R.layout.fragment_username_profile, container, false);
+        init();
+        return inflatedView;
+    }
 
+    private void init(){
+        Log.d("MyTAG","Ваше имя:"+mineUsername);
         profilePicture = inflatedView.findViewById(R.id.profilePicture);
         friends = new ArrayList<String>();
         pets = new ArrayList<Animal>();
@@ -236,13 +240,24 @@ public class UsernameProfileFragment extends Fragment implements RecyclerViewInt
             }
         });
 
-        return inflatedView;
     }
 
     @Override
     public void onItemClick(int position) {
-        mineUsername = String.valueOf(friends.get(position));
-        Log.d("MyTAG",String.valueOf(friends.get(position)));
+        if (PetsDataAdapter.isGoToPet){
+            PetsDataAdapter.isGoToPet = false;
+        }
 
+        else if (FriendsDataAdapter.goToUsername.equals(UserInformation.username)){
+            Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_yourProfile);
+        }
+
+        else if (YourProfileFragment.isHuman){
+            YourProfileFragment.isHuman = false;
+            Log.d("MyTAG",mineUsername);
+            YourProfileFragment.userClick = FriendsDataAdapter.goToUsername;
+            Log.d("MyTAG",mineUsername);
+            init();
+        }
     }
 }

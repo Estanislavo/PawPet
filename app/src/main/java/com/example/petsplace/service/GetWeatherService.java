@@ -1,6 +1,6 @@
 package com.example.petsplace.service;
 
-import com.example.petsplace.weather.WeatherInformation;
+import com.example.petsplace.json.WeatherInformation;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

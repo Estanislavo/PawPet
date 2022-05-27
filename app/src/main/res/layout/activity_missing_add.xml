@@ -7,34 +7,20 @@
     tools:context=".MissingAdd">
 
 
-    <com.google.android.material.textfield.TextInputLayout
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/showUpload"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="100dp"
-        android:layout_marginHorizontal="60dp"
-        android:id="@+id/imageName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_image_name"
-        app:startIconDrawable="@drawable/ic_baseline_person_24"
-        app:counterMaxLength="20"
-        app:counterEnabled="true"
-        app:endIconMode="clear_text">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/setImageName"
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="20"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
+        android:layout_marginHorizontal="100dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="100dp"
         android:layout_marginHorizontal="60dp"
+        android:layout_below="@id/showUpload"
         android:id="@+id/text"
-        android:layout_below="@id/imageName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,31 +39,25 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <Button
-        android:layout_below="@id/text"
+    <com.google.android.material.button.MaterialButton
+        app:cornerRadius="40dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/upload"
+        android:layout_below="@id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
-        android:layout_marginTop="100dp"
-        android:text="Upload"/>
+        android:layout_marginTop="40dp"
+        android:text="@string/add_image"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_below="@id/imageName"
-        android:id="@+id/showUpload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginHorizontal="100dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
+        app:cornerRadius="40dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/sendImage"
         android:layout_below="@id/upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/send"/>
+        android:layout_marginTop="40dp"
+        android:text="@string/confirm"/>
 </RelativeLayout>

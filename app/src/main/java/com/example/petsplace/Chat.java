@@ -2,14 +2,25 @@ package com.example.petsplace;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.TimeAnimator;
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.petsplace.adapters.MessageDataAdapter;
+import com.example.petsplace.auxiliary.HelperClass;
 import com.example.petsplace.auxiliary.MessageClass;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.google.android.gms.tasks.Task;
@@ -46,6 +58,7 @@ public class Chat extends AppCompatActivity {
     private ArrayList<MessageClass> messagesList;
     private TextView friendName;
     private String friendUsername;
+    private NotificationManager nm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,43 +77,12 @@ public class Chat extends AppCompatActivity {
         friendPictureChat = findViewById(R.id.friendPictureChat);
 
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
-                .child("profilePhotos")
-                .child(friendUsername);
-        myRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String upload = snapshot.getValue(String.class);
-
-                Picasso.with(getApplicationContext())
-                        .load(upload)
-                        .fit()
-                        .centerCrop()
-                        .into(friendPictureChat);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        getMessages(UserInformation.username,friendUsername);
+        if (HelperClass.hasConnection(getApplicationContext())) {
+            init();
+        }
+        else{
+            createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+        }
 
     }
 
@@ -176,6 +158,58 @@ public class Chat extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void init(){
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
+                .child("profilePhotos")
+                .child(friendUsername);
+        myRef.addChildEventListener(new ChildEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String upload = snapshot.getValue(String.class);
+
+                Picasso.with(getApplicationContext())
+                        .load(upload)
+                        .fit()
+                        .centerCrop()
+                        .into(friendPictureChat);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        getMessages(UserInformation.username, friendUsername);
+    }
+
+    public void createSnackbarWithText(int title, int message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Chat.this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        }).show();
     }
 
 }

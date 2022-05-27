@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="apptheme">#26F62F</color>
     <color name="grey">#808080</color>
+    <color name="dark_grey">#424242</color>
     <color name="mine_message">#609AEA</color>
     <color name="not_mine_message">#F5F5F6</color>
     <color name="background">#ECD48D</color>

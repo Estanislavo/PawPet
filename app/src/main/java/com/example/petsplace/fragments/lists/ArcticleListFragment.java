@@ -1,9 +1,12 @@
 package com.example.petsplace.fragments.lists;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,10 +18,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.example.petsplace.ArcticleShow;
 import com.example.petsplace.Chat;
 import com.example.petsplace.ChatList;
+import com.example.petsplace.NameViewModel;
 import com.example.petsplace.R;
 import com.example.petsplace.adapters.ArticleDataAdapter;
 import com.example.petsplace.adapters.ChatDataAdapter;
@@ -36,42 +42,48 @@ public class ArcticleListFragment extends Fragment implements RecyclerViewInterf
     private RecyclerView recycler;
     private ArticleDataAdapter adapter;
     private EditText searchBar;
+    private ProgressBar progressBar;
+    private View view;
+    private RelativeLayout relativeLayout;
+    private  NameViewModel model;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_arcticle_list, container, false);
+        view = inflater.inflate(R.layout.fragment_arcticle_list, container, false);
 
-        searchBar = view.findViewById(R.id.searchBar);
 
-        recycler = view.findViewById(R.id.recycler);
-        recycler.hasFixedSize();
-        recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //Убирает запрет с использования интернета в общем потоке
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        model = new ViewModelProvider(this).get(NameViewModel.class);
+        model.getCurrentName().observe(getViewLifecycleOwner(), users -> {
+            // update UI
+            if (articles != null) {
+
+                Thread threadInit = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        init();
+                    }
+                });
+                threadInit.start();
+
+                downloadArticles();
+            }
+        });
 
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 articles = ArticleHelper.getArticleIntroductionList();
                 articlesStart = articles;
+                model.setCurrentName(articles);
             }
         });
 
-        thread.run();
-        //Ва
-
-        adapter = new ArticleDataAdapter(getActivity(), articles, this);
-        recycler.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        String texts = ArticleHelper.getArticle(articles.get(1).getArticleUrl());
-        search();
+        thread.start();
 
         return view;
     }
@@ -82,6 +94,35 @@ public class ArcticleListFragment extends Fragment implements RecyclerViewInterf
         intent.putExtra("url",articles.get(position).getIntroductionImage());
         intent.putExtra("texts",ArticleHelper.getArticle(articles.get(position).getArticleUrl()));
         startActivity(intent);
+    }
+
+    private void init(){
+        progressBar = view.findViewById(R.id.progress_bar);
+    }
+
+    private void downloadArticles(){
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+
+        String texts = ArticleHelper.getArticle(articles.get(1).getArticleUrl());
+        progressBar.setVisibility(View.INVISIBLE);
+        //String texts = ArticleHelper.getArticle(articles.get(1).getArticleUrl());
+
+        //progressBar.setVisibility(View.INVISIBLE);
+
+        searchBar = view.findViewById(R.id.searchBar);
+        recycler = view.findViewById(R.id.recycler);
+        recycler.hasFixedSize();
+        recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //Ва
+
+        adapter = new ArticleDataAdapter(getActivity(), articles, this);
+        recycler.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        search();
     }
 
     protected void search(){

@@ -15,14 +15,13 @@ import java.util.List;
 
 public class ArticleHelper {
     public static ArrayList<ArticleIntroduction> list = new ArrayList<>();
-
     public static ArrayList<ArticleIntroduction> getArticleIntroductionList() {
         ArrayList<ArticleIntroduction> aIList = new ArrayList<ArticleIntroduction>();
         ArrayList<String> text = new ArrayList<String>();
         ArrayList<String> articleUrlList = new ArrayList<String>();
         int count = 0;
 
-        for (int i = 1; i < 8; i++) {
+        for (int i = 1; i < 9; i++) {
             try {
 
                 Document doc = Jsoup.connect("https://zoopassage.ru/articles?PAGEN_1=" + String.valueOf(i)).get();

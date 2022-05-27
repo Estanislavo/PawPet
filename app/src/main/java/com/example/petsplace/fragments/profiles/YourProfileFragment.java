@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.petsplace.ChatList;
@@ -50,15 +51,16 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
     private TextView username;
     private TextView petsCount;
     private TextView friendsCount;
-    private RecyclerView friendList;
     private RecyclerView petList;
     private Button exit;
     private View view;
     private CircleImageView profilePicture;
     private BottomNavigationView bottomNavigationView;
     private String upload;
+    private ImageView friendAddList;
 
     public static String userClick = "";
+    public static boolean isHuman = false;
 
 
     @Override
@@ -75,6 +77,7 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
         friendsCount = inflatedView.findViewById(R.id.friendsCount);
         petsCount = inflatedView.findViewById(R.id.petsCount);
         profilePicture = inflatedView.findViewById(R.id.profilePicture);
+        friendAddList = inflatedView.findViewById(R.id.friendAddList);
 
         bottomNavigationView = inflatedView.findViewById(R.id.bottom);
         friendsCount.setText(String.valueOf(friends.size()));
@@ -85,9 +88,25 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
 
         String mineUsername = UserInformation.username;
 
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))){
+                    Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_arcticleList);
+                }
+                else if (item.getTitle().equals(getResources().getString(R.string.messenger))){
+                    Intent intent  = new Intent(getActivity(), ChatList.class);
+                    startActivity(intent);
+                }
+                else if (item.getTitle().equals(getResources().getString(R.string.losts))){
+                    Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_missingShow);
+                }
+                return true;
+            }
+        });
 
 
-        friendList = inflatedView.findViewById(R.id.friendsList);
+        RecyclerView friendList = inflatedView.findViewById(R.id.friendsList);
         FriendsDataAdapter adapter = new FriendsDataAdapter(getActivity(),friends,this);
         friendList.setAdapter(adapter);
         friendList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -188,24 +207,6 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
         username = inflatedView.findViewById(R.id.profileUsername);
         username.setText(mineUsername);
 
-
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))){
-                    Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_arcticleList);
-                }
-                else if (item.getTitle().equals(getResources().getString(R.string.messenger))){
-                    Intent intent  = new Intent(getActivity(), ChatList.class);
-                    startActivity(intent);
-                }
-                else if (item.getTitle().equals(getResources().getString(R.string.losts))){
-                    Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_missingShow);
-                }
-                return true;
-            }
-        });
-
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
                 .child("profilePhotos")
                 .child(UserInformation.username);
@@ -247,6 +248,13 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
             }
         });
 
+        friendAddList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_friendRequests);
+            }
+        });
+
         return inflatedView;
     }
 
@@ -259,14 +267,20 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
             startActivity(intent);
         }
 
+        else if (PetsDataAdapter.isGoToPet){
+            PetsDataAdapter.isGoToPet = false;
+        }
+
         else if (FriendsDataAdapter.goToUsername == "+"){
             Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_globalList);
             FriendsDataAdapter.goToUsername = "";
 
         }
         else {
+            isHuman = true;
             userClick = FriendsDataAdapter.goToUsername;
             Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_usernameProfile);
+
         }
     }
 }

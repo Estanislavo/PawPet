@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_nav_yourProfile_to_nav_arcticleList"
             app:destination="@id/nav_arcticleList" />
+        <action
+            android:id="@+id/action_nav_yourProfile_to_nav_friendRequests"
+            app:destination="@id/nav_friendRequests" />
     </fragment>
 
     <fragment
@@ -35,6 +38,12 @@
         <action
             android:id="@+id/action_nav_usernameProfile_to_nav_arcticleList"
             app:destination="@id/nav_arcticleList" />
+        <action
+            android:id="@+id/action_nav_usernameProfile_to_nav_yourProfile"
+            app:destination="@id/nav_yourProfile"
+            app:popUpTo="@+id/nav_usernameProfile"
+            app:popUpToInclusive="true"
+            />
     </fragment>
 
 
@@ -89,6 +98,12 @@
             app:destination="@id/nav_friendRequests"
             app:popUpTo="@+id/nav_notFriendProfile"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_nav_notFriendProfile_self"
+            app:destination="@id/nav_notFriendProfile" />
+        <action
+            android:id="@+id/action_nav_notFriendProfile_to_nav_yourProfile"
+            app:destination="@id/nav_yourProfile" />
     </fragment>
     <fragment
         android:id="@+id/nav_friendRequests"

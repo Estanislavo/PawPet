@@ -6,6 +6,7 @@
     tools:context=".fragments.weather.WeatherFragment">
 
     <RelativeLayout
+        android:id="@+id/rela"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,23 +18,39 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_marginTop="40dp"
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="180dp"
+            android:fontFamily="sans-serif-medium"
+            android:text=""
+            android:textAlignment="center"
+
+            android:textSize="68sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_below="@id/time"
             android:id="@+id/yourCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:fontFamily="sans-serif-medium"
             android:text=""
             android:textAlignment="center"
-            android:textSize="34sp"
-            />
+
+            android:textSize="48sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_marginTop="100dp"
             android:id="@+id/temperatureInYourRegion"
-            android:layout_below="@id/yourCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/yourCity"
+            android:layout_marginTop="50dp"
             android:text=""
             android:textAlignment="center"
-            android:textSize="34sp" />
+            android:textSize="48sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 </FrameLayout>

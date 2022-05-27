@@ -45,12 +45,6 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        getChats();
-    }
-
-
-
-    protected void getChats(){
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users").child(UserInformation.username).child("chats_names");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -93,6 +87,11 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
         search();
     }
 
+
+
+    protected void getChats(){
+    }
+
     protected void search(){
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -120,7 +119,7 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
             ArrayList<String> newChats = new ArrayList<String>();
 
             for (String friend : chatsList ){
-                if (friend.startsWith(search)) {
+                if (friend.toLowerCase().contains(search)) {
                     newChats.add(friend);
                 }
             }
@@ -137,8 +136,5 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
         Intent intent = new Intent(ChatList.this,Chat.class);
         intent.putExtra("chat", chatsList.get(position));
         startActivity(intent);
-
-        //Логирование имени пользователя. Почему бы и нет?
-        Log.d("MyTAG",UserInformation.username);
     }
 }

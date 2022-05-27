@@ -1,4 +1,4 @@
-package com.example.petsplace.weather;
+package com.example.petsplace.json;
 
 public class Current {
     String last_updated_epoch;

@@ -40,6 +40,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -69,10 +70,47 @@ public class NotFriendUserProfileFragment extends Fragment implements RecyclerVi
 
         inflatedView = inflater.inflate(R.layout.fragment_not_friend_user_profile, container, false);
 
+        init();
+
+        return inflatedView;
+    }
+
+    private void init(){
+
         friends = new ArrayList<String>();
         pets = new ArrayList<Animal>();
 
         mineUsername = YourProfileFragment.userClick;
+
+
+
+
+
+
+
+        DatabaseReference dg = FirebaseDatabase.getInstance().getReference("users").child(UserInformation.username).child("friend_requests");
+
+        dg.orderByValue().equalTo(mineUsername).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()) {
+                    sendFriendRequest.setText(R.string.requests_send);
+                    sendFriendRequest.setEnabled(false);
+                    sendFriendRequest.setAlpha(0.6F);
+                } else{ }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
 
         profilePicture = inflatedView.findViewById(R.id.profilePicture);
         friendList = inflatedView.findViewById(R.id.friendsList);
@@ -213,24 +251,26 @@ public class NotFriendUserProfileFragment extends Fragment implements RecyclerVi
 
 
         sendFriendRequest.setOnClickListener(view -> {
-            DatabaseReference dr = FirebaseDatabase.getInstance().getReference("users").child(UserInformation.username).child("friend_requests");
-            dr.child(mineUsername).push().setValue(mineUsername)
-            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Log.d("MyTAG","Заявка отправлена");
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("MyTAG","Что-то пошло не так.");
-                }
-            });
+            sendFriendRequest.setText(R.string.requests_send);
+            sendFriendRequest.setEnabled(false);
+            sendFriendRequest.setAlpha(0.6F);
+            DatabaseReference dr = FirebaseDatabase.getInstance().getReference("users").child(mineUsername).child("friend_requests");
+            dr.child(UserInformation.username).push().setValue(UserInformation.username)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Log.d("MyTAG","Заявка отправлена");
 
-            Navigation.findNavController(inflatedView).navigate(R.id.action_nav_notFriendProfile_to_nav_friendRequests);
-
-
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("MyTAG","Что-то пошло не так.");
+                            sendFriendRequest.setEnabled(true);
+                            sendFriendRequest.setAlpha(1F);
+                        }
+                    });
         });
 
         write.setOnClickListener(view -> {
@@ -255,12 +295,25 @@ public class NotFriendUserProfileFragment extends Fragment implements RecyclerVi
                 return true;
             }
         });
-
-        return inflatedView;
     }
 
     @Override
     public void onItemClick(int position) {
+        Log.d("MyTAG","Проа");
+        if (PetsDataAdapter.isGoToPet){
+            PetsDataAdapter.isGoToPet = false;
+        }
 
+        else if (FriendsDataAdapter.goToUsername.equals(UserInformation.username)){
+            Navigation.findNavController(inflatedView).navigate(R.id.action_nav_notFriendProfile_to_nav_yourProfile);
+        }
+
+        else {
+            YourProfileFragment.isHuman = false;
+            Log.d("MyTAG",mineUsername);
+            YourProfileFragment.userClick = FriendsDataAdapter.goToUsername;
+            Log.d("MyTAG",mineUsername);
+            init();
+        }
     }
 }

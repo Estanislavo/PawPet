@@ -30,7 +30,9 @@ public class FriendListDataAdapter extends RecyclerView.Adapter<FriendListDataAd
     private final RecyclerViewInterface recyclerViewInterface;
     public static int pressedAll = -1;
     public static String goToUsername = "none";
-    private Context context;
+
+
+    Context context;
 
     private ArrayList<String> friendNames;
 
@@ -50,11 +52,7 @@ public class FriendListDataAdapter extends RecyclerView.Adapter<FriendListDataAd
 
     @Override
     public void onBindViewHolder(@NonNull FriendListDataAdapter.FriendListViewHolder holder, int position) {
-        String friendN;
-
-        friendN = friendNames.get(position);
-
-
+        String friendN = friendNames.get(position);
         holder.friendName.setText(friendN);
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()

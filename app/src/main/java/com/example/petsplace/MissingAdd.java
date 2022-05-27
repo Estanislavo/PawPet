@@ -52,7 +52,6 @@ public class MissingAdd extends AppCompatActivity {
 
         chooseImage = findViewById(R.id.upload);
         sendImage = findViewById(R.id.sendImage);
-        imageName = findViewById(R.id.setImageName);
         text = findViewById(R.id.setText);
         photo = findViewById(R.id.showUpload);
 
@@ -91,7 +90,7 @@ public class MissingAdd extends AppCompatActivity {
 
     private void uploadImage(Uri uri){
         if (uri != null){
-            StorageReference imageReference = mStorageRef.child(imageName.getText().toString().trim() + "." + getFileExtensions(uri));
+            StorageReference imageReference = mStorageRef.child(String.valueOf(System.currentTimeMillis()) + "." + getFileExtensions(uri));
             imageReference.putFile(uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -104,15 +103,16 @@ public class MissingAdd extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     String photoStringLink = uri.toString();
 
-                                    Upload upload = new Upload(text.getText().toString(), UserInformation.username,imageName.getText().toString()+"_-_"+System.currentTimeMillis(), photoStringLink);
+                                    Upload upload = new Upload(text.getText().toString(), UserInformation.username,String.valueOf(System.currentTimeMillis()), photoStringLink);
                                     String keyID = mDatabaseRef.push().getKey();
                                     mDatabaseRef.child(keyID).setValue(upload);
                                 }
                             });
+                            Intent intent = new Intent(getApplicationContext(),Profile.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finishAfterTransition();
 
-
-                            //Intent intent = new Intent(getApplicationContext(),MissingShow.class);
-                            //startActivity(intent);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

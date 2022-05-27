@@ -1,4 +1,4 @@
-package com.example.petsplace.weather;
+package com.example.petsplace.json;
 
 public class Condition {
     String text;

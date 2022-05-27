@@ -73,13 +73,27 @@ public class FriendsListFragment extends Fragment implements RecyclerViewInterfa
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String msgFromDB = snapshot.getValue(String.class);
+                friends.remove(friends.indexOf(msgFromDB));
+                adapter.notifyDataSetChanged();
+
+
+            }
 
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) { }
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                String msgFromDB = snapshot.getValue(String.class);
+                friends.remove(friends.indexOf(msgFromDB));
+                adapter.notifyDataSetChanged();
+            }
 
             @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String msgFromDB = snapshot.getValue(String.class);
+                friends.remove(friends.indexOf(msgFromDB));
+                adapter.notifyDataSetChanged();
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }

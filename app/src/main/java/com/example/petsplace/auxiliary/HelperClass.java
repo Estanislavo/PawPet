@@ -8,6 +8,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.example.petsplace.Registration;
+
 import java.util.Locale;
 
 public class HelperClass {
@@ -44,4 +46,6 @@ public class HelperClass {
         context.getResources().updateConfiguration(config,
                 context.getResources().getDisplayMetrics());
     }
+
+
 }

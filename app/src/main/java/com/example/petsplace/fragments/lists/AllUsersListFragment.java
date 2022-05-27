@@ -50,10 +50,7 @@ public class AllUsersListFragment extends Fragment implements RecyclerViewInterf
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflatedView = inflater.inflate(R.layout.fragment_all_users_list, container, false);
-        // Inflate the layout for this fragment
-
         searchBar = inflatedView.findViewById(R.id.searchBar);
-
         friends = new ArrayList<String>();
 
         RelativeLayout relativeList = inflatedView.findViewById(R.id.relativeList);
@@ -137,16 +134,19 @@ public class AllUsersListFragment extends Fragment implements RecyclerViewInterf
 
     @Override
     public void onItemClick(int position) {
+
+        YourProfileFragment.userClick = FriendListDataAdapter.goToUsername;
+
         if (FriendListDataAdapter.pressedAll == 0) {
 
             Intent intent = new Intent(getActivity(), Chat.class);
             intent.putExtra("chat", FriendListDataAdapter.goToUsername);
             startActivity(intent);
-        } else if (FriendListDataAdapter.pressedAll == 1) {
+        }
+
+        else if (FriendListDataAdapter.pressedAll == 1) {
             int le = 0;
-
             if (FriendRequestsListFragment.off == 0) {
-
                 DatabaseReference dr = FirebaseDatabase.getInstance().getReference("users").child(UserInformation.username).child("friends");
 
                 dr.orderByValue().equalTo(FriendListDataAdapter.goToUsername).addValueEventListener(new ValueEventListener() {
@@ -154,25 +154,16 @@ public class AllUsersListFragment extends Fragment implements RecyclerViewInterf
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         if (!snapshot.exists()) {
-                            //Intent intent = new Intent(getActivity(), UsernameProfile.class);
-                            //intent.putExtra("username",FriendListDataAdapter.goToUsername);
-                            //intent.putExtra("isFriend","0");
-                            //startActivity(intent);
                             friends.remove(FriendListDataAdapter.goToUsername);
                             YourProfileFragment.userClick = FriendListDataAdapter.goToUsername;
                             Navigation.findNavController(view).navigate(R.id.action_nav_globalList_to_nav_notFriendProfile);
                         } else {
                             try {
-                                //friends.remove(FriendListDataAdapter.goToUsername);
                                 Navigation.findNavController(view).navigate(R.id.action_nav_globalList_to_nav_usernameProfile);
                             }
                             catch (Exception e){
                                 Log.d("MyTAG","Произошла ошибка");
                             }
-                            //Intent intent = new Intent(getActivity(), UsernameProfile.class);
-                            //intent.putExtra("username",FriendListDataAdapter.goToUsername);
-                            //intent.putExtra("isFriend","1");
-                            //startActivity(intent);
                         }
                     }
 
@@ -183,6 +174,10 @@ public class AllUsersListFragment extends Fragment implements RecyclerViewInterf
                 });
             }
         }
+
+    }
+
+    private void init(){
 
     }
 }

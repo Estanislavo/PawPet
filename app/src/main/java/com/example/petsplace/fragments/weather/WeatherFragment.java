@@ -1,8 +1,6 @@
 package com.example.petsplace.fragments.weather;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -15,12 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +25,7 @@ import com.example.petsplace.R;
 import com.example.petsplace.geolocation.LocListener;
 import com.example.petsplace.geolocation.LocListenerInterface;
 import com.example.petsplace.service.GetWeatherService;
-import com.example.petsplace.weather.WeatherInformation;
+import com.example.petsplace.json.WeatherInformation;
 
 import java.io.IOException;
 import java.util.List;
@@ -54,6 +51,8 @@ public class WeatherFragment extends Fragment implements LocListenerInterface {
     private Call<WeatherInformation> call;
     private Retrofit retrofit;
     private ProgressBar progressBar;
+    private RelativeLayout rela;
+    private TextView timeT;
 
     private View view;
 
@@ -74,6 +73,8 @@ public class WeatherFragment extends Fragment implements LocListenerInterface {
     }
 
     private void init(){
+        timeT = view.findViewById(R.id.time);
+        rela = view.findViewById(R.id.rela);
         locationManager = (LocationManager) getActivity().getSystemService(getActivity().LOCATION_SERVICE);
         locListener = new LocListener();
         locListener.setLocListenerInterface(this);
@@ -120,18 +121,6 @@ public class WeatherFragment extends Fragment implements LocListenerInterface {
         }
     }
 
-    private void turnGPSOn(Activity activity){
-        Intent intent=new Intent("android.location.GPS_ENABLED_CHANGE");
-        intent.putExtra("enabled", true);
-        activity.sendBroadcast(intent);
-    }
-
-    private void turnGPSOff(Activity activity){
-        Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
-        intent.putExtra("enabled", false);
-        activity.sendBroadcast(intent);
-    }
-
     private void getCity(){
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
 
@@ -168,8 +157,49 @@ public class WeatherFragment extends Fragment implements LocListenerInterface {
                 WeatherInformation weatherInformation = response.body();
 
                 progressBar.setVisibility(View.INVISIBLE);
-                temperatureInYourRegion.setText(weatherInformation.getCurrent().getTemp_c()+"°C");
-                yourCity.setText("Ваш город: "+cityName);
+
+                String time = weatherInformation.getLocation().getLocaltime();
+                int index = time.indexOf(" ");
+                time = time.substring(index);
+                if (weatherInformation.getCurrent().getCondition().getText().contains("rain")){
+                    timeT.setText(time);
+                    yourCity.setText("Погода в вашем городе");
+                    rela.setBackground(getActivity().getResources().getDrawable(R.drawable.rainy_day));
+                    temperatureInYourRegion.setText(weatherInformation.getCurrent().getTemp_c()+"°C"+"\nДождливо");
+                }
+                else{
+
+                    String[] re = time.split(":");
+                    int t = Integer.parseInt(re[0].trim());
+                    if (t < 6){
+                        timeT.setText(time);
+                        yourCity.setText("Погода в вашем городе");
+                        rela.setBackground(getActivity().getResources().getDrawable(R.drawable.night));
+                    }
+                    else if (t > 6 && t < 12){
+                        timeT.setText(time);
+                        yourCity.setText("Погода в вашем городе");
+                        rela.setBackground(getActivity().getResources().getDrawable(R.drawable.morning));
+                    }
+                    else if (t > 12 && t < 16){
+                        timeT.setText(time);
+                        yourCity.setText("Погода в вашем городе");
+                        rela.setBackground(getActivity().getResources().getDrawable(R.drawable.day));
+                    }
+                    else if (t > 16 && t < 24){
+                        timeT.setText(time);
+                        yourCity.setText("Погода в вашем городе");
+                        rela.setBackground(getActivity().getResources().getDrawable(R.drawable.evening));
+                    }
+
+                    if (weatherInformation.getCurrent().getCondition().getText().contains("cloudy")){
+                        temperatureInYourRegion.setText(weatherInformation.getCurrent().getTemp_c()+"°C"+"\nПасмурно");
+                    }
+                    else{
+                        temperatureInYourRegion.setText(weatherInformation.getCurrent().getTemp_c()+"°C"+"\nСолнечно");
+                    }
+                }
+                //yourCity.setText("Погода в вашем городе");
             }
 
             @Override

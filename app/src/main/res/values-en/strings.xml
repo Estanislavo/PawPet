@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PetsPlace</string>
+    <string name="app_name">PawPet</string>
     <string name="username">Username</string>
     <string name="friends">Friends</string>
     <string name="pets">Pets</string>
@@ -34,8 +34,10 @@
     <string name="exotic_animal">Exotic</string>
     <string name="choose_name_pet">Your pet\'s name</string>
     <string name="choose_age_pet">How old is he</string>
+    <string name="requests_send">Application sent</string>
     <string name="enter_email">Enter email</string>
     <string name="enter_login">Enter login</string>
+    <string name="add_image">Add image</string>
     <string name="enter_image_name">Enter the name</string>
     <string name="enter_text">Enter text</string>
     <string name="send_friend_request">Add as friend</string>
@@ -82,11 +84,11 @@
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_your_profile">YourProfile</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="previous">Previous</string>
     <string name="fragment_go_to_registration">Sign out</string>
+
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

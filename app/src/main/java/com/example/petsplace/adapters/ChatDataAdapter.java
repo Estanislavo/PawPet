@@ -26,7 +26,7 @@ public class ChatDataAdapter extends RecyclerView.Adapter<ChatDataAdapter.ChatVi
 
     private final RecyclerViewInterface recyclerViewInterface;
 
-    ArrayList<java.lang.String> names;
+    ArrayList<String> names;
     Context context;
 
     public ChatDataAdapter(Context context, ArrayList<String> messages,RecyclerViewInterface recyclerViewInterface) {
@@ -37,20 +37,19 @@ public class ChatDataAdapter extends RecyclerView.Adapter<ChatDataAdapter.ChatVi
 
     @NonNull
     @Override
-    public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChatDataAdapter.ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view  = LayoutInflater.from(context).inflate(R.layout.item_chat, parent, false);
         return new ChatViewHolder(view, recyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-        java.lang.String nm = names.get(position);
+        String nm = names.get(position);
         holder.name.setText(nm);
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
                 .child("profilePhotos")
                 .child(names.get(position));
-
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

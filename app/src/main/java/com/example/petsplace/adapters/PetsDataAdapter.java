@@ -21,6 +21,7 @@ public class PetsDataAdapter extends RecyclerView.Adapter<PetsDataAdapter.PetsVi
 
     private final RecyclerViewInterface recyclerViewInterface;
     public static String goToPet = "none";
+    public static boolean isGoToPet = false;
     private final int userNotMine = 0;
     private final int userMine = 1;
 
@@ -114,6 +115,7 @@ public class PetsDataAdapter extends RecyclerView.Adapter<PetsDataAdapter.PetsVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    isGoToPet = true;
                     goToPet = friendName.getText().toString();
                     int pos = getBindingAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION){
