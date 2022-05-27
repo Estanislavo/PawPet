@@ -14,6 +14,7 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.petsplace.auxiliary.ArticleHelper;
@@ -22,6 +23,7 @@ import com.example.petsplace.auxiliary.ProfilePictureUpload;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.example.petsplace.fragments.lists.ArcticleListFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +36,7 @@ public class Registration extends AppCompatActivity {
 
     private Button registration, entry;
     private EditText usernameText, emailText, passwordText;
+    private TextView reset;
 
     private DatabaseReference usersDatabase;
     private FirebaseAuth auth;
@@ -57,6 +60,7 @@ public class Registration extends AppCompatActivity {
 
         loadData();
 
+        reset = findViewById(R.id.reset);
         registration = findViewById(R.id.registaration);
         entry = findViewById(R.id.entry);
         usernameText = findViewById(R.id.username);
@@ -102,6 +106,24 @@ public class Registration extends AppCompatActivity {
                     else {
                         entry.setClickable(false);
                         authenticationUser();
+                    }
+                }
+            });
+
+            reset.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (emailText.getText().toString().length() != 0) {
+                        FirebaseAuth.getInstance().sendPasswordResetEmail(emailText.getText().toString())
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                createSnackbarWithText(R.string.suc_res,R.string.email_send);
+                            }
+                        });
+                    }
+                    else{
+                        createSnackbarWithText(R.string.recovery,R.string.enter_email_rec);
                     }
                 }
             });

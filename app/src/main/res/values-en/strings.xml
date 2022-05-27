@@ -41,6 +41,10 @@
     <string name="enter_image_name">Enter the name</string>
     <string name="enter_text">Enter text</string>
     <string name="send_friend_request">Add as friend</string>
+    <string name="reset_password"><u>Recover</u></string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="recovery">Account recovery</string>
+    <string name="enter_email_rec">Enter your email!</string>
     <string name="send">Send</string>
     <string name="enter_password">Enter password</string>
     <string name="congrats">Congrats!</string>
@@ -52,6 +56,9 @@
     <string name="encyclopedia">Encyclopedia</string>
     <string name="losts">Losts</string>
     <string name="count">Count</string>
+
+    <string name="email_send">An email has been sent to you</string>
+    <string name="suc_res">Confirmation</string>
 
 
     <string name="no_ethernet">No internet connection</string>

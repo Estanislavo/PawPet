@@ -114,10 +114,32 @@
         android:layout_marginHorizontal="56dp"
         android:id="@+id/registaration"
         android:layout_below="@id/entry"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="@string/register"
         android:textSize="16dp"
         android:textColor="@color/orange"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/forgot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registaration"
+        android:gravity="center"
+        android:text="@string/forgot_your_password"
+        android:textSize="20dp"
+        android:textColor="@color/orange" />
+
+    <TextView
+        android:id="@+id/reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/forgot"
+        android:gravity="center"
+        android:text="@string/reset_password"
+        android:textColor="@color/orange"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 </RelativeLayout>

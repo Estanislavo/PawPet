@@ -39,6 +39,10 @@
     <string name="enter_email">Введите email</string>
     <string name="enter_login">Введите логин</string>
     <string name="enter_image_name">Введите название</string>
+    <string name="forgot_your_password">Забыли пароль?</string>
+    <string name="recovery">Восстановление аккаунта</string>
+    <string name="enter_email_rec">Введите почту!</string>
+    <string name="reset_password"><u>Восстановить</u></string>
     <string name="enter_text">Введите текст</string>
     <string name="send_friend_request">Добавить в друзья</string>
     <string name="send">Отправить</string>
@@ -52,6 +56,9 @@
     <string name="encyclopedia">Энциклопедия</string>
     <string name="losts">Потеряшки</string>
     <string name="count">Количество</string>
+
+    <string name="email_send">Письмо было отправлено вам на почту</string>
+    <string name="suc_res">Подтверждение</string>
 
 
     <string name="no_ethernet">Отсутсвует подключение к интернету</string>
