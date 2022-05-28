@@ -34,7 +34,6 @@ public class MailConfirm extends AppCompatActivity {
                     startActivity(intent);
                     finishAfterTransition();
                 }
-
                 else{
                     createSnackbarWithText(R.string.email_not_verified,R.string.verify_email);
                 }

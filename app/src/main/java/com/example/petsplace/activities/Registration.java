@@ -107,7 +107,7 @@ public class Registration extends AppCompatActivity {
                                 registration.setClickable(true);
                                 saveData();
 
-
+                                addUser();
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 user.sendEmailVerification()
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -127,7 +127,7 @@ public class Registration extends AppCompatActivity {
         else {
             emailText.setText("");
             createSnackbarWithText(R.string.wrong_format,R.string.wrong_format_text);
-            entry.setClickable(true);
+            registration.setClickable(true);
         }
     }
 
@@ -148,13 +148,13 @@ public class Registration extends AppCompatActivity {
                                     startActivity(intent);
                                     finishAfterTransition();
                                 } else {
-                                    Toast.makeText(context, "Неверный логин или пароль", Toast.LENGTH_SHORT).show();
+                                    createSnackbarWithText(R.string.wrong_format,R.string.try_again);
                                     entry.setClickable(true);
                                 }
                             }
                         });
             } else {
-                Toast.makeText(context, "Неверная почта, логин или пароль", Toast.LENGTH_SHORT).show();
+                createSnackbarWithText(R.string.something_went_wrong,R.string.try_again);
                 entry.setClickable(true);
             }
     }

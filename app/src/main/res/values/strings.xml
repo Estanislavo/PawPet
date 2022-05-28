@@ -10,6 +10,8 @@
     <string name="exit">Выйти из аккаунта</string>
     <string name="messages">Сообщение</string>
     <string name="my_profile">Мой профиль</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
+
     <string name="friend_name">Имя друга</string>
     <string name="check">Проверить</string>
     <string name="req">Заявки в друзья</string>
