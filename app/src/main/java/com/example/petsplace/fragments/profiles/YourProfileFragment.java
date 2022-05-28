@@ -69,7 +69,7 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
         View inflatedView = inflater.inflate(R.layout.fragment_your_profile, container, false);
         view = inflatedView;
 
-        HelperClass.changeLanguage(getActivity(),"en");
+        //HelperClass.changeLanguage(getActivity(),"en");
 
         ArrayList<String> friends = new ArrayList<String>();
         ArrayList<Animal> pets = new ArrayList<Animal>();
