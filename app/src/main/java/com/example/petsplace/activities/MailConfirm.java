@@ -1,4 +1,4 @@
-package com.example.petsplace;
+package com.example.petsplace.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.petsplace.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MailConfirm extends AppCompatActivity {

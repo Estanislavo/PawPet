@@ -52,6 +52,7 @@ public class AnimalName extends AppCompatActivity {
                                     Log.d("MyTAG", "Питомец успешно добавлен");
                                     Intent intent = new Intent(getApplicationContext(), AnimalCreate.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.putExtra("type",petType);
                                     startActivity(intent);
                                     finishAfterTransition();
                                 }

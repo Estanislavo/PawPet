@@ -1,5 +1,7 @@
 package com.example.petsplace.fragments.profiles;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,7 +12,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,9 +19,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.petsplace.ChatList;
-import com.example.petsplace.Registration;
+import com.example.petsplace.activities.ChatList;
+import com.example.petsplace.activities.Registration;
 import com.example.petsplace.R;
 import com.example.petsplace.adapters.FriendsDataAdapter;
 import com.example.petsplace.adapters.PetsDataAdapter;
@@ -28,7 +30,6 @@ import com.example.petsplace.adapters.RecyclerViewInterface;
 import com.example.petsplace.animal.AnimalChoice;
 import com.example.petsplace.auxiliary.Animal;
 import com.example.petsplace.auxiliary.HelperClass;
-import com.example.petsplace.auxiliary.ProfilePictureUpload;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -38,7 +39,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -92,14 +92,29 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))){
-                    Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_arcticleList);
+                    if (HelperClass.hasConnection(getContext())) {
+                        Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_arcticleList);
+                    }
+                    else{
+                        createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    }
                 }
                 else if (item.getTitle().equals(getResources().getString(R.string.messenger))){
-                    Intent intent  = new Intent(getActivity(), ChatList.class);
-                    startActivity(intent);
+                    if (HelperClass.hasConnection(getContext())) {
+                        Intent intent = new Intent(getActivity(), ChatList.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    }
                 }
                 else if (item.getTitle().equals(getResources().getString(R.string.losts))){
-                    Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_missingShow);
+                    if (HelperClass.hasConnection(getContext())) {
+                        Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_missingShow);
+                    }
+                    else{
+                        createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    }
                 }
                 return true;
             }
@@ -282,5 +297,16 @@ public class YourProfileFragment extends Fragment implements RecyclerViewInterfa
             Navigation.findNavController(view).navigate(R.id.action_nav_yourProfile_to_nav_usernameProfile);
 
         }
+    }
+
+    public void createSnackbarWithText(int title, int message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        }).show();
     }
 }

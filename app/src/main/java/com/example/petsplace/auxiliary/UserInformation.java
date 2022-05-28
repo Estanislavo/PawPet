@@ -1,8 +1,6 @@
 package com.example.petsplace.auxiliary;
 
-import android.content.res.Configuration;
-
-import com.example.petsplace.Registration;
+import com.example.petsplace.activities.Registration;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserInformation {

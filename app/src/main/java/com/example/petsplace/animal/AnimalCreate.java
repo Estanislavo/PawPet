@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.example.petsplace.Profile;
+import com.example.petsplace.activities.Profile;
 import com.example.petsplace.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -26,10 +26,34 @@ public class AnimalCreate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animal_create);
 
+        Intent intent = getIntent();
+        String type = intent.getStringExtra("type");
+
         anim = AnimationUtils.loadAnimation(this,R.anim.for_text_view);
         tv = (TextView) findViewById(R.id.congrats);
         newPet = findViewById(R.id.congratsPet);
         image = findViewById(R.id.circleImage);
+
+        switch (type){
+            case ("кошка"):
+                image.setImageResource(R.drawable.kitty);
+                break;
+            case ("собака"):
+                image.setImageResource(R.drawable.puppy);
+                break;
+            case ("птица"):
+                image.setImageResource(R.drawable.bird);
+                break;
+            case ("рыба"):
+                image.setImageResource(R.drawable.fish);
+                break;
+            case ("грызун"):
+                image.setImageResource(R.drawable.rabbit);
+                break;
+            case ("экзотический"):
+                image.setImageResource(R.drawable.lion);
+                break;
+        }
         newPet.startAnimation(anim);
         tv.startAnimation(anim);
         image.startAnimation(anim);

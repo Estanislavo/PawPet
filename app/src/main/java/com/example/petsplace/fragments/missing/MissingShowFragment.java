@@ -1,7 +1,7 @@
 package com.example.petsplace.fragments.missing;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -22,15 +22,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.example.petsplace.ChatList;
-import com.example.petsplace.MissingAdd;
+import com.example.petsplace.activities.ChatList;
+import com.example.petsplace.activities.MissingAdd;
 import com.example.petsplace.R;
-import com.example.petsplace.adapters.ArticleDataAdapter;
-import com.example.petsplace.adapters.FriendsDataAdapter;
 import com.example.petsplace.adapters.MissingDataAdapter;
 import com.example.petsplace.adapters.RecyclerViewInterface;
-import com.example.petsplace.auxiliary.ArticleIntroduction;
+import com.example.petsplace.auxiliary.HelperClass;
 import com.example.petsplace.auxiliary.Upload;
+import com.example.petsplace.auxiliary.UserInformation;
 import com.example.petsplace.fragments.profiles.YourProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -107,14 +106,20 @@ public class MissingShowFragment extends Fragment implements RecyclerViewInterfa
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))){
-                    Navigation.findNavController(view).navigate(R.id.action_nav_missingShow_to_nav_arcticleList);
+                if (HelperClass.hasConnection(getContext())) {
+                    if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))) {
+                        Navigation.findNavController(view).navigate(R.id.action_nav_missingShow_to_nav_arcticleList);
+                    } else if (item.getTitle().equals(getResources().getString(R.string.messenger))) {
+                        Intent intent = new Intent(getActivity(), ChatList.class);
+                        startActivity(intent);
+                    }
+                    return true;
                 }
-                else if (item.getTitle().equals(getResources().getString(R.string.messenger))){
-                    Intent intent  = new Intent(getActivity(), ChatList.class);
-                    startActivity(intent);
+
+                else{
+                    createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    return  true;
                 }
-                return true;
             }
         });
 
@@ -133,8 +138,15 @@ public class MissingShowFragment extends Fragment implements RecyclerViewInterfa
 
     @Override
     public void onItemClick(int position) {
-        YourProfileFragment.userClick = MissingDataAdapter.goToUsername;
-        Navigation.findNavController(view).navigate(R.id.action_nav_missingShow_to_nav_usernameProfile);
+        if (!MissingDataAdapter.goToUsername.equals(UserInformation.username)) {
+            Log.d("myTAG","ВАШЕ ИМЯ:"+MissingDataAdapter.goToUsername);
+            YourProfileFragment.userClick = MissingDataAdapter.goToUsername;
+            Navigation.findNavController(view).navigate(R.id.action_nav_missingShow_to_nav_usernameProfile);
+        }
+        else{
+            YourProfileFragment.userClick = MissingDataAdapter.goToUsername;
+            Navigation.findNavController(view).navigate(R.id.action_nav_missingShow_to_nav_yourProfile);
+        }
     }
 
     protected void search(){
@@ -176,5 +188,16 @@ public class MissingShowFragment extends Fragment implements RecyclerViewInterfa
             recyclerView.invalidate();
         }
 
+    }
+
+    public void createSnackbarWithText(int title, int message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        }).show();
     }
 }

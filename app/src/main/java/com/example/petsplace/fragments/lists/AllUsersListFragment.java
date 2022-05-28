@@ -2,7 +2,6 @@ package com.example.petsplace.fragments.lists;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -15,12 +14,11 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.petsplace.Chat;
+import com.example.petsplace.activities.Chat;
 import com.example.petsplace.R;
 import com.example.petsplace.adapters.FriendListDataAdapter;
 import com.example.petsplace.adapters.RecyclerViewInterface;
@@ -154,7 +152,6 @@ public class AllUsersListFragment extends Fragment implements RecyclerViewInterf
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         if (!snapshot.exists()) {
-                            friends.remove(FriendListDataAdapter.goToUsername);
                             YourProfileFragment.userClick = FriendListDataAdapter.goToUsername;
                             Navigation.findNavController(view).navigate(R.id.action_nav_globalList_to_nav_notFriendProfile);
                         } else {

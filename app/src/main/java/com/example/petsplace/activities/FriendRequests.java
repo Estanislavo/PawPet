@@ -1,4 +1,4 @@
-package com.example.petsplace;
+package com.example.petsplace.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.petsplace.R;
 import com.example.petsplace.adapters.FriendRequestsDataAdapter;
 import com.example.petsplace.adapters.RecyclerViewInterface;
 import com.example.petsplace.adapters.RecyclerViewReqInterface;

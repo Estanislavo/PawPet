@@ -59,7 +59,7 @@ public class EditProfileFragment extends Fragment {
         city = inflatedView.findViewById(R.id.city);
 
         username.setText(UserInformation.username);
-        city.setText("Ваш город...");
+        city.setText("Moscow");
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
                 .child("profilePhotos")

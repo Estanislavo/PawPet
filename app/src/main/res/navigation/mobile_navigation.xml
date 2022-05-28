@@ -58,12 +58,15 @@
         <action
             android:id="@+id/action_nav_missingShow_to_nav_arcticleList"
             app:destination="@id/nav_arcticleList" />
+        <action
+            android:id="@+id/action_nav_missingShow_to_nav_yourProfile"
+            app:destination="@id/nav_yourProfile" />
     </fragment>
 
 
     <activity
         android:id="@+id/nav_registration"
-        android:name="com.example.petsplace.Registration"
+        android:name="com.example.petsplace.activities.Registration"
         android:label="@string/exit"
         tools:layout="@layout/activity_registration" />
     <fragment
@@ -87,7 +90,11 @@
         android:id="@+id/nav_arcticleList"
         android:name="com.example.petsplace.fragments.lists.ArcticleListFragment"
         android:label="@string/encyclopedia"
-        tools:layout="@layout/fragment_arcticle_list" />
+        tools:layout="@layout/fragment_arcticle_list" >
+        <action
+            android:id="@+id/action_nav_arcticleList_to_nav_missingShow"
+            app:destination="@id/nav_missingShow" />
+    </fragment>
     <fragment
         android:id="@+id/nav_notFriendProfile"
         android:name="com.example.petsplace.fragments.profiles.NotFriendUserProfileFragment"

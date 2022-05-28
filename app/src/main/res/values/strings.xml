@@ -12,6 +12,7 @@
     <string name="my_profile">Мой профиль</string>
     <string name="friend_name">Имя друга</string>
     <string name="check">Проверить</string>
+    <string name="req">Заявки в друзья</string>
     <string name="or">Или</string>
     <string name="email_not_verified">Почта не подтверждена</string>
     <string name="verify_email">Подтвердите вашу почту</string>

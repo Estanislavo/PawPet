@@ -1,4 +1,4 @@
-package com.example.petsplace;
+package com.example.petsplace.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,19 +9,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.petsplace.auxiliary.ArticleHelper;
+import com.example.petsplace.R;
 import com.example.petsplace.auxiliary.HelperClass;
 import com.example.petsplace.auxiliary.ProfilePictureUpload;
 import com.example.petsplace.auxiliary.UserInformation;
-import com.example.petsplace.fragments.lists.ArcticleListFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +29,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Locale;
 
 public class Registration extends AppCompatActivity {
 
@@ -75,6 +76,10 @@ public class Registration extends AppCompatActivity {
                 finishAfterTransition();
             }
             else{
+                //Intent intent = new Intent(context, Profile.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //startActivity(intent);
+                //finishAfterTransition();
                 Intent intent = new Intent(context, MailConfirm.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

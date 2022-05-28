@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.example.petsplace.Chat;
+import com.example.petsplace.activities.Chat;
 import com.example.petsplace.R;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.example.petsplace.adapters.FriendListDataAdapter;

@@ -1,4 +1,4 @@
-package com.example.petsplace;
+package com.example.petsplace.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.petsplace.R;
 import com.example.petsplace.auxiliary.Upload;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -108,7 +109,7 @@ public class MissingAdd extends AppCompatActivity {
                                     mDatabaseRef.child(keyID).setValue(upload);
                                 }
                             });
-                            Intent intent = new Intent(getApplicationContext(),Profile.class);
+                            Intent intent = new Intent(getApplicationContext(), Profile.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finishAfterTransition();

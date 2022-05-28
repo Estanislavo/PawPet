@@ -42,6 +42,7 @@
     <string name="enter_text">Enter text</string>
     <string name="check">Check</string>
     <string name="or">Or</string>
+    <string name="req">Friend requests</string>
     <string name="send_friend_request">Add as friend</string>
     <string name="reset_password"><u>Reset</u></string>
     <string name="forgot_your_password">Forgot your password?</string>

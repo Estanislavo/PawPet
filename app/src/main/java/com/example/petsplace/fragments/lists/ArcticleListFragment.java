@@ -1,37 +1,39 @@
 package com.example.petsplace.fragments.lists;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.example.petsplace.ArcticleShow;
-import com.example.petsplace.Chat;
-import com.example.petsplace.ChatList;
-import com.example.petsplace.NameViewModel;
+import com.example.petsplace.activities.ArcticleShow;
+import com.example.petsplace.activities.ChatList;
+import com.example.petsplace.auxiliary.HelperClass;
+import com.example.petsplace.viewmodel.NameViewModel;
 import com.example.petsplace.R;
 import com.example.petsplace.adapters.ArticleDataAdapter;
-import com.example.petsplace.adapters.ChatDataAdapter;
 import com.example.petsplace.adapters.RecyclerViewInterface;
 import com.example.petsplace.auxiliary.ArticleHelper;
 import com.example.petsplace.auxiliary.ArticleIntroduction;
-import com.example.petsplace.auxiliary.UserInformation;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,7 @@ public class ArcticleListFragment extends Fragment implements RecyclerViewInterf
     private View view;
     private RelativeLayout relativeLayout;
     private  NameViewModel model;
+    private BottomNavigationView bottomNavigationView;
 
 
     @Override
@@ -98,6 +101,7 @@ public class ArcticleListFragment extends Fragment implements RecyclerViewInterf
 
     private void init(){
         progressBar = view.findViewById(R.id.progress_bar);
+        bottomNavigationView = view.findViewById(R.id.bottom);
     }
 
     private void downloadArticles(){
@@ -121,6 +125,29 @@ public class ArcticleListFragment extends Fragment implements RecyclerViewInterf
         adapter = new ArticleDataAdapter(getActivity(), articles, this);
         recycler.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (HelperClass.hasConnection(getContext())) {
+                    if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))) { }
+
+                    else if (item.getTitle().equals(getResources().getString(R.string.messenger))) {
+                        Intent intent = new Intent(getActivity(), ChatList.class);
+                        startActivity(intent);
+                    }
+
+                    else if (item.getTitle().equals(getResources().getString(R.string.losts))) {
+                        Navigation.findNavController(view).navigate(R.id.action_nav_arcticleList_to_nav_missingShow);
+                    }
+                    return true;
+                }
+                else{
+                    createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    return false;
+                }
+            }
+        });
 
         search();
     }
@@ -164,5 +191,17 @@ public class ArcticleListFragment extends Fragment implements RecyclerViewInterf
             recycler.invalidate();
         }
 
+    }
+
+
+    public void createSnackbarWithText(int title, int message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        }).show();
     }
 }

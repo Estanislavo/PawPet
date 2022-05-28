@@ -1,4 +1,4 @@
-package com.example.petsplace;
+package com.example.petsplace.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +10,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.petsplace.R;
 import com.example.petsplace.adapters.RecyclerViewInterface;
 import com.squareup.picasso.Picasso;
 

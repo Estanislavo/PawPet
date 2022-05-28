@@ -5,9 +5,32 @@
     android:layout_height="match_parent"
     tools:context=".fragments.lists.FriendRequestsListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/friendAdd"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/friendsReq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/req"
+            android:textAlignment="center"
+            android:textColor="@color/orange"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:layout_below="@id/friendsReq"
+            android:id="@+id/friendAdd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+
+
+    </RelativeLayout>
 
 </FrameLayout>

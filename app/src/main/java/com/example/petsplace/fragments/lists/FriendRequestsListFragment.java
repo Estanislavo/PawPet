@@ -1,10 +1,8 @@
 package com.example.petsplace.fragments.lists;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,17 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.petsplace.ChatList;
 import com.example.petsplace.R;
-import com.example.petsplace.adapters.FriendListDataAdapter;
 import com.example.petsplace.adapters.FriendRequestsDataAdapter;
-import com.example.petsplace.adapters.RecyclerViewInterface;
 import com.example.petsplace.adapters.RecyclerViewReqInterface;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

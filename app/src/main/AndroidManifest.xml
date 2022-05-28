@@ -17,21 +17,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetsPlace">
         <activity
-            android:name=".MailConfirm"
+            android:name=".activities.MailConfirm"
             android:exported="false" />
         <activity
-            android:name=".FriendRequests"
+            android:name=".activities.FriendRequests"
             android:exported="false" />
         <activity
-            android:name=".ArcticleShow"
+            android:name=".activities.ArcticleShow"
             android:exported="false" />
         <activity
-            android:name=".Profile"
+            android:name=".activities.Profile"
             android:exported="false"
             android:label="@string/title_activity_profile"
             android:theme="@style/Theme.PetsPlace.NoActionBar" />
         <activity
-            android:name=".MissingAdd"
+            android:name=".activities.MissingAdd"
             android:exported="false" />
         <activity
             android:name=".animal.AnimalName"
@@ -43,13 +43,13 @@
             android:name=".animal.AnimalChoice"
             android:exported="false" />
         <activity
-            android:name=".ChatList"
+            android:name=".activities.ChatList"
             android:exported="false" />
         <activity
-            android:name=".Chat"
+            android:name=".activities.Chat"
             android:exported="false" />
         <activity
-            android:name=".Registration"
+            android:name=".activities.Registration"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

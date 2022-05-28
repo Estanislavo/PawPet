@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.petsplace.R;
-import com.example.petsplace.Registration;
+import com.example.petsplace.activities.Registration;
 import com.google.firebase.auth.FirebaseAuth;
 
 

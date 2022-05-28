@@ -1,13 +1,17 @@
-package com.example.petsplace;
+package com.example.petsplace.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.petsplace.R;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.example.petsplace.fragments.lists.AllUsersListFragment;
 import com.example.petsplace.fragments.lists.FriendsListFragment;
@@ -35,6 +39,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Profile extends AppCompatActivity {
@@ -54,13 +60,8 @@ public class Profile extends AppCompatActivity {
 
         Log.d("MyTAG","Ваш юзернейм:"+UserInformation.username);
 
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-
-        if (username == null){
-        }
-        else{
-        }
 
 
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
@@ -69,8 +70,7 @@ public class Profile extends AppCompatActivity {
         setSupportActionBar(binding.appBarProfile.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_usernameProfile, R.id.nav_yourProfile, R.id.nav_missingShow)
                 .setOpenableLayout(drawer)
@@ -82,7 +82,6 @@ public class Profile extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.profile, menu);
 
         TextView textView = findViewById(R.id.headerUsername);
@@ -130,4 +129,5 @@ public class Profile extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }

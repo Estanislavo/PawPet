@@ -1,5 +1,7 @@
 package com.example.petsplace.fragments.profiles;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,13 +20,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.petsplace.Chat;
-import com.example.petsplace.ChatList;
+import com.example.petsplace.activities.Chat;
+import com.example.petsplace.activities.ChatList;
 import com.example.petsplace.R;
 import com.example.petsplace.adapters.FriendsDataAdapter;
 import com.example.petsplace.adapters.PetsDataAdapter;
 import com.example.petsplace.adapters.RecyclerViewInterface;
 import com.example.petsplace.auxiliary.Animal;
+import com.example.petsplace.auxiliary.HelperClass;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -227,14 +230,30 @@ public class UsernameProfileFragment extends Fragment implements RecyclerViewInt
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))){
-                    Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_arcticleList);
+                    if (HelperClass.hasConnection(getContext())) {
+                        Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_arcticleList);
+                    }
+                    else{
+                        createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    }
+
                 }
                 else if (item.getTitle().equals(getResources().getString(R.string.messenger))){
-                    Intent intent  = new Intent(getActivity(), ChatList.class);
-                    startActivity(intent);
+                    if (HelperClass.hasConnection(getContext())) {
+                        Intent intent = new Intent(getActivity(), ChatList.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    }
                 }
                 else if (item.getTitle().equals(getResources().getString(R.string.losts))){
-                    Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_missingShow);
+                    if (HelperClass.hasConnection(getContext())) {
+                        Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_missingShow);
+                    }
+                    else{
+                        createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    }
                 }
                 return true;
             }
@@ -259,5 +278,16 @@ public class UsernameProfileFragment extends Fragment implements RecyclerViewInt
             Log.d("MyTAG",mineUsername);
             init();
         }
+    }
+
+    public void createSnackbarWithText(int title, int message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        }).show();
     }
 }

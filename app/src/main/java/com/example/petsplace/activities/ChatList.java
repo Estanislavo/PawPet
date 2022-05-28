@@ -1,4 +1,4 @@
-package com.example.petsplace;
+package com.example.petsplace.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,16 +11,12 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 
+import com.example.petsplace.R;
 import com.example.petsplace.adapters.ChatDataAdapter;
-import com.example.petsplace.adapters.FriendListDataAdapter;
 import com.example.petsplace.adapters.RecyclerViewInterface;
-import com.example.petsplace.auxiliary.MessageClass;
 import com.example.petsplace.auxiliary.UserInformation;
-import com.example.petsplace.fragments.lists.FriendRequestsListFragment;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +29,7 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
 
     private RecyclerView recyclerView;
     private ArrayList<String> chatsList = new ArrayList<String>();
+    private ArrayList<String> firstChatsList = new ArrayList<String>();
     private EditText searchBar;
 
     @Override
@@ -56,6 +53,7 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String msgFromDB = snapshot.getKey();
                 chatsList.add(msgFromDB);
+                firstChatsList = chatsList;
                 adapter.notifyDataSetChanged();
 
             }
@@ -63,6 +61,7 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 chatsList.remove(chatsList.indexOf(snapshot.getValue(String.class)));
+                firstChatsList = chatsList;
                 adapter.notifyDataSetChanged();
 
             }
@@ -70,12 +69,14 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 chatsList.remove(chatsList.indexOf(snapshot.getValue(String.class)));
+                firstChatsList = chatsList;
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 chatsList.remove(chatsList.indexOf(snapshot.getValue(String.class)));
+                firstChatsList = chatsList;
                 adapter.notifyDataSetChanged();
             }
 
@@ -111,6 +112,7 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
         String search = searchBar.getText().toString();
 
         if (search.length() == 0){
+            chatsList = firstChatsList;
             ChatDataAdapter adapter = new ChatDataAdapter(getApplicationContext(),chatsList,this);
             recyclerView.setAdapter(adapter);
             recyclerView.invalidate();
@@ -119,21 +121,20 @@ public class ChatList extends AppCompatActivity implements RecyclerViewInterface
             ArrayList<String> newChats = new ArrayList<String>();
 
             for (String friend : chatsList ){
-                if (friend.toLowerCase().contains(search)) {
+                if (friend.toLowerCase().contains(search.toLowerCase())) {
                     newChats.add(friend);
                 }
             }
-
-            ChatDataAdapter newAdapter = new ChatDataAdapter(getApplicationContext(),newChats,this);
+            chatsList = newChats;
+            ChatDataAdapter newAdapter = new ChatDataAdapter(getApplicationContext(),chatsList,this);
             recyclerView.setAdapter(newAdapter);
-            recyclerView.invalidate();
         }
 
     }
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(ChatList.this,Chat.class);
+        Intent intent = new Intent(ChatList.this, Chat.class);
         intent.putExtra("chat", chatsList.get(position));
         startActivity(intent);
     }

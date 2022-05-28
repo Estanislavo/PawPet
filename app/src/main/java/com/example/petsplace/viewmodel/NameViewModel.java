@@ -1,4 +1,4 @@
-package com.example.petsplace;
+package com.example.petsplace.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

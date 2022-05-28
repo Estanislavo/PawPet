@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="@string/city"
+                        android:text="Moscow"
                         android:textSize="28dp"/>
                 </androidx.cardview.widget.CardView>
             </RelativeLayout>

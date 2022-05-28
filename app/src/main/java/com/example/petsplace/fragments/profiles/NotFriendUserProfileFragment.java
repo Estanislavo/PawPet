@@ -1,5 +1,7 @@
 package com.example.petsplace.fragments.profiles;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,7 +12,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,19 +20,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.petsplace.Chat;
-import com.example.petsplace.ChatList;
-import com.example.petsplace.FriendRequests;
+import com.example.petsplace.activities.Chat;
+import com.example.petsplace.activities.ChatList;
 import com.example.petsplace.R;
-import com.example.petsplace.adapters.FriendListDataAdapter;
 import com.example.petsplace.adapters.FriendsDataAdapter;
 import com.example.petsplace.adapters.PetsDataAdapter;
 import com.example.petsplace.adapters.RecyclerViewInterface;
 import com.example.petsplace.auxiliary.Animal;
+import com.example.petsplace.auxiliary.HelperClass;
 import com.example.petsplace.auxiliary.UserInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -44,7 +43,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -82,15 +80,9 @@ public class NotFriendUserProfileFragment extends Fragment implements RecyclerVi
 
         mineUsername = YourProfileFragment.userClick;
 
+        DatabaseReference dg = FirebaseDatabase.getInstance().getReference("users").child(mineUsername).child("friend_requests").child(UserInformation.username);
 
-
-
-
-
-
-        DatabaseReference dg = FirebaseDatabase.getInstance().getReference("users").child(UserInformation.username).child("friend_requests");
-
-        dg.orderByValue().equalTo(mineUsername).addValueEventListener(new ValueEventListener() {
+        dg.orderByValue().equalTo(UserInformation.username).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -98,7 +90,9 @@ public class NotFriendUserProfileFragment extends Fragment implements RecyclerVi
                     sendFriendRequest.setText(R.string.requests_send);
                     sendFriendRequest.setEnabled(false);
                     sendFriendRequest.setAlpha(0.6F);
-                } else{ }
+                } else{
+                    Log.d("MyTAG","Такого нет");
+                }
             }
 
             @Override
@@ -282,17 +276,21 @@ public class NotFriendUserProfileFragment extends Fragment implements RecyclerVi
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))){
-                    Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_arcticleList);
+                if (HelperClass.hasConnection(getContext())) {
+                    if (item.getTitle().equals(getResources().getString(R.string.encyclopedia))) {
+                        Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_arcticleList);
+                    } else if (item.getTitle().equals(getResources().getString(R.string.messenger))) {
+                        Intent intent = new Intent(getActivity(), ChatList.class);
+                        startActivity(intent);
+                    } else if (item.getTitle().equals(getResources().getString(R.string.losts))) {
+                        Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_missingShow);
+                    }
+                    return true;
                 }
-                else if (item.getTitle().equals(getResources().getString(R.string.messenger))){
-                    Intent intent  = new Intent(getActivity(), ChatList.class);
-                    startActivity(intent);
+                else{
+                    createSnackbarWithText(R.string.no_ethernet,R.string.try_again);
+                    return false;
                 }
-                else if (item.getTitle().equals(getResources().getString(R.string.losts))){
-                    Navigation.findNavController(inflatedView).navigate(R.id.action_nav_usernameProfile_to_nav_missingShow);
-                }
-                return true;
             }
         });
     }
@@ -315,5 +313,17 @@ public class NotFriendUserProfileFragment extends Fragment implements RecyclerVi
             Log.d("MyTAG",mineUsername);
             init();
         }
+    }
+
+
+    public void createSnackbarWithText(int title, int message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        }).show();
     }
 }
