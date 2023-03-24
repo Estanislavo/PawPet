@@ -21,40 +21,29 @@ public class ArticleHelper {
         ArrayList<String> articleUrlList = new ArrayList<String>();
         int count = 0;
 
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < 6; i++) {
             try {
 
-                Document doc = Jsoup.connect("https://zoopassage.ru/articles?PAGEN_1=" + String.valueOf(i)).get();
-                Element element = doc.getElementsByClass("page-aricles").get(0);
+                Document doc = Jsoup.connect("https://zoobazar.by/advice/?PAGEN_2=" + String.valueOf(i)).get();
+                Element element = doc.getElementsByClass("news-list").get(0);
+                Elements news = doc.getElementsByClass("news-item");
 
-                Elements imagesUrl = element.getElementsByClass("article__header-link");
-                Elements articleTitle = element.getElementsByClass("article__title-link");
-
-                //Log.d("MyTAG",String.valueOf(articleTitle.text()));
-
-                for (Element elementI : articleTitle) {
-                    String data = String.valueOf(elementI);
-
-                    int indexStart = data.indexOf("href=\"");
-                    int indexEnd = data.indexOf("/\">");
-                    String arcticleUrl = "https://zoopassage.ru" + data.substring(indexStart + 6, indexEnd) + "/";
-
-                    articleUrlList.add(arcticleUrl);
-                    text.add(elementI.text());
+                for (Element newz : news){
+                    String imagesUrl = newz.select("picture").first().select("source").first().attr("srcset");
+                    imagesUrl = imagesUrl.substring(0, imagesUrl.indexOf(" "));
+                    imagesUrl = "https://zoobazar.by" + imagesUrl;
+                    Log.d("MyTAG", imagesUrl);
+                    String articleUrl = "https://zoobazar.by" + newz.select("a").first().attr("href");
+                    Log.d("MyTAG", articleUrl);
+                    String Introduction = String.valueOf(newz.getElementsByClass("news-item__title").get(0).select("span").text());
+                    Log.d("MyTAG", Introduction);
+                    aIList.add(new ArticleIntroduction(articleUrl, Introduction, imagesUrl));
                 }
 
-
-                for (Element elementI : imagesUrl) {
-                    String data = String.valueOf(elementI);
-                    int indexStart = data.indexOf("data-bgr-webp=");
-                    int indexEnd = data.indexOf(" style=");
-                    String url = "https://zoopassage.ru/" + data.substring(indexStart + 16, indexEnd - 1);
-
-                    aIList.add(new ArticleIntroduction(articleUrlList.get(count),text.get(count), url));
-                    count += 1;
-                }
+                Elements imagesUrl = element.getElementsByClass("news-item__image-wrapper");
+                Elements articleTitle = element.getElementsByClass("read-more");
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.d("MyTAG", String.valueOf(e));
             }
         }
         aIList.remove(0);
@@ -66,7 +55,7 @@ public class ArticleHelper {
 
         try {
             Document doc = Jsoup.connect(url).get();
-            Elements elements = doc.getElementsByClass("article-detail-content__body");
+            Elements elements = doc.getElementsByClass("news-detail__content");
             for (Element element : elements){
                 texts += (String.valueOf(element.text().trim()));
             }
